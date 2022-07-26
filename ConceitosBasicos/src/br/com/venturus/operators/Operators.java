@@ -1,5 +1,7 @@
 package br.com.venturus.operators;
 
+import java.util.Formatter;
+
 public class Operators {
     public static void main(String[] args) {
         // Unary Arithmetic Operators (++ --)
@@ -7,8 +9,8 @@ public class Operators {
 
         int i = +10;
         int i2 = -10;
-        int i3 = ++i;
-        int i4 = i++;
+        int i3 = ++i; // prefix
+        int i4 = i++; // postfix
         int i5 = --i;
         int i6 = i--;
 
@@ -40,10 +42,9 @@ public class Operators {
         System.out.println("i12 = " + i12);	// 3
         System.out.println("Hello " + "World" + "!");
 
-
         System.out.println();
 
-        // Assignment Operators (= += -= *= /= $=)
+        // Assignment Operators (= += -= *= /= %=)
         System.out.println("===== Assignment Operators =====");
 
         int i13 = 10;
@@ -59,6 +60,7 @@ public class Operators {
         int i15 = 20;
 
         System.out.println(i14 == i15);	// false
+        //System.out.println(i14 = i15);
         System.out.println(i14 != i15);	// true
         System.out.println(i14 > i15);	// false
         System.out.println(i14 < i15);	// true
@@ -71,11 +73,11 @@ public class Operators {
         System.out.println("===== Logical Operators =====");
 
 //		System.out.println(false & (5 / 0 == 0) ); 	// Runtime Exception
-        System.out.println(false && (5 / 0 == 0) );	// false
+        System.out.println(false && (5 / 0 == 0) );	// false (short circuit)
 //		System.out.println(true | (5 / 0 == 0) );	// Runtime Exception
         System.out.println(true || (5 / 0 == 0) );	// true
         System.out.println("!true = " + !true);		// false
-        System.out.println(true ^ true); 			// false
+        System.out.println(true ^ true); 			// false (XOR)
         System.out.println(true ^ false);			// true
         System.out.println(false ^ true);			// true
 
@@ -113,36 +115,42 @@ public class Operators {
          * 				0 0 1 = 1
          */
 
-        System.out.println("~1 = " + ~1);
-        System.out.println(Integer.toBinaryString(1));		// 00000001
-        System.out.println(Integer.toBinaryString(-2));		// 11111110
-        System.out.println((byte)0b11111110);				// -2
-        System.out.println((byte)0b10000000);				// -128 = -(2 ^ 7)
-        System.out.println((byte)0b11000000);				// -64 = -(2 ^ 7) + (2 ^ 6)
 
+        System.out.println();
+        int value1 = 1;
+        System.out.println(" value1 = " + String.format("%32s", Integer.toBinaryString(value1))
+                .replaceAll(" ", "0"));
+        System.out.println("~value1 = " + String.format("%32s", Integer.toBinaryString(~value1))
+                .replaceAll(" ", "0"));
 
-        System.out.println("5 = " + 0b101);
-        System.out.println("5 >> 1 = " + (0b101 >> 1));
-        System.out.println("5 in binary format = " + Integer.toBinaryString(5));
-        System.out.println("2 in binary format = " + Integer.toBinaryString(2));	// 10
+        System.out.println();
+        System.out.println("5 in binary format = " + String.format("%32s", Integer.toBinaryString(0b101))
+                .replaceAll(" ", "0"));
+        System.out.println("5 >> 1 =             " + String.format("%32s", Integer.toBinaryString((0b101 >> 1)))
+                .replaceAll(" ", "0"));
+        System.out.println("5 >>> 1 =            " + String.format("%32s", Integer.toBinaryString((0b101 >>> 1)))
+                .replaceAll(" ", "0"));
 
-
-        System.out.println("5 = " + 0b101);					// 000000101
-        System.out.println("5 >>> 1 = " + (0b101 >>> 1));	// 000000010
-
+        System.out.println();
         int negativeByteValue = 0b11111111111111111111111110000000;
         System.out.println("-128 = " + negativeByteValue);					// 11111111111111111111111110000000
         System.out.println("-128 >>> 1 = " + (negativeByteValue >>> 1));	// 01111111111111111111111111000000
         System.out.println("-128 >> 1 = " + (negativeByteValue >> 1));		// 11111111111111111111111111000000
 
-
+        System.out.println();
         System.out.println("5 = " + 0b101);
         System.out.println("5 << 1 = " + (0b101 << 1));
-        System.out.println("5 in binary format = " + Integer.toBinaryString(5));
-        System.out.println("10 in binary format = " + Integer.toBinaryString(10));
+        System.out.println("5 in binary format = " + String.format("%32s", Integer.toBinaryString(0b101))
+                .replaceAll(" ", "0"));
+        System.out.println("10 in binary format = " + String.format("%32s", Integer.toBinaryString((0b101 << 1)))
+                .replaceAll(" ", "0"));
 
-        System.out.println("10 * 2 = 10 << 1 = " + (10 << 1));	// x << y = x * (2 ^ y)
-        System.out.println("10 / 2 = 10 >> 1 = " + (10 >> 1));	// x >> y = x / (2 ^ y)
+        System.out.println("10 * 2 = 10 << 1 = " + (10 << 1));	// x << y = x * (2 ^ y) // multiple by 2
+        System.out.println("10 / 2 = 10 >> 1 = " + (10 >> 1));	// x >> y = x / (2 ^ y) // divide by 2
+
+        System.out.println("-128 = " + negativeByteValue);					// 11111111111111111111111110000000
+        System.out.println("-128 <<< 1 = " + (negativeByteValue >> 1));	// 01111111111111111111111111000000
+        System.out.println("-128 << 1 = " + (negativeByteValue >> 1 << 1));		// 11111111111111111111111111000000
 
         System.out.println();
 
